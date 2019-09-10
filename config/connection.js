@@ -1,19 +1,25 @@
 var mysql = require("mysql");
 
-// create the connection information for the sql database
-var connection = mysql.createConnection({
-  host: "tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-
-  // Your port; if not 3306
-  port: 3306,
-
-  // Your username
-  user: "uampfunil9okfned",
-
-  // Your password
-  password: "bu46edqg8m8c5sbs",
-  database: "teamproject2"
+if(process.env.JAWSDB_URL) {
+  var connection = mysql.createConnection({
+    host: "tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    port: 3306,
+    user: "uampfunil9okfned",
+    password: "bu46edqg8m8c5sbs",
+    database: "teamproject2"
 });
+    
+} else {
+  var connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Maxfac11103",
+    database: "project2_DB"
+
+  });
+}
+
+var PORT = process.env.PORT || 8000;
 
 connection.connect(function(err) {
   if (err) throw err;
@@ -22,7 +28,7 @@ connection.connect(function(err) {
 });
 
 function readfunction() {
-  connection.query("SELECT * FROM project-2", function(err, res) {
+  connection.query("SELECT * FROM players", function(err, res) {
     if (err) throw err;
 
     // Log all results of the SELECT statement
