@@ -1,8 +1,12 @@
 # Mighty Dungeon Gold Getter
 
+---
+
 ### Overview
 
 This is a text based rpg game where the purpose is to venture into the dark dungeon and collect as much gold as you can.  The game has a one or two player mode, and has teams of one or two players.  Each team competes against each other to collect gold, one team at a time.  The team that is not in play has a limited view of their opponents progress.
+
+---
 
 ### Features
 
@@ -11,6 +15,8 @@ A list of features of the game.
 - Games of 1 v 1 or 2 v 2 teams
 - Team based chat messages
 - Text based challenges per dungeon room
+
+---
 
 ### Game Play
 
@@ -24,6 +30,8 @@ A list of features of the game.
    3. If 2 v 2, the player selects a teammate, and then waits for an opposing team list.
       1. If the player's team is chosen by a different team as the opponent, a dialog will pop-up telling them they are challenged and asking if they are ready.
 3. After teams and opponents are chosen we move to the dungeon start with one team selected to go first (challenging team goes first)
+
+---
 
 ###### Running the Dungeon --
 
@@ -40,6 +48,8 @@ A list of features of the game.
 6. A game is complete when a solo player or both teams have died three times, or a solo player or team has completed the __*Ultimate Challenge*__.  Completing the __*Ultimate Challenge*__  is an automatic win in any game.
    1. When the game is complete and no player has defeated the __*Ultimate Challenge*__, the team with the highest score is declared the winner.
 
+---
+
 ### User Interface
 
 The user interface will have a medieval/fantasy theme with a display of useful information for the player.
@@ -53,6 +63,8 @@ The user interface will have a medieval/fantasy theme with a display of useful i
 1. Display showing team mate
 2. Display showing opponent(s)
 3. Team chat window
+
+---
 
 ### Database
 
@@ -109,7 +121,7 @@ The database will contain tables that define the player attributes, team attribu
 2. ResponseText - varchar, NOT NULL
 3. OptionListId - int 
 
-### 
+---
 
 ### API Layer
 
@@ -136,6 +148,163 @@ A list of api calls that will be used by the game.
 - POST item
   - Sends item selection into player table
 
+---
 
+### Objects
+
+###### The five rooms are:  
+
+1. great hall
+2. guard chamber
+3. solar
+4. chapel
+5. library
+
+###### Items list:  
+
+1. apple, 
+2. compass, 
+3. crossbow, 
+4. lantern, 
+5. mace, 
+6. medicine
+7. shield, 
+8. sleeping bag, 
+9. sword, 
+10. toaster
+
+###### Characters/enemies: 
+
+1. demon, 
+2. dragon, 
+3. giant spider, 
+4. griffin, 
+5. knight, 
+6. ogre, 
+7. queen, 
+8. siren
+
+---
+
+### Room Stories
+
+###### Initial entrance text - 
+
+​	Since tales of a mighty castle full of gold and treasure reached your ears, you have been on a quest across the realm to seek glory and riches.  Now before you stands the foreboding gates of the long forgotten citadel for which you have searched.  Who knows what secrets lie within...
+
+(button to begin)
+
+1. great hall
+
+   {
+
+   Entrance Text: " You enter the time-worn gates of the old castle.  Almost immediately ornate sconces along the wall spring to life with bright blue flames.  The fire light adds an eerie luminescence to the chamber.  While the outside was decrepit and old looking, the Great Hall before you is beautiful and enchanting."
+
+   There is a door at the far end of the hall.
+
+   What do you do?
+
+   1. Search the room
+      1. response - You find xxxxx gold coins
+      2. You see an item gleaming near the corner by the door
+         1. response - You found a toaster!
+            1. pick it up?
+               1. response - you pick it up and move on through the door sensing there is nothing left for you here.  --->
+            2. leave it behind
+               1. response - Though you hope not to regret it later, but you move on through the door feeling there is nothing left for you here.  --->
+   2. Move to the next room ---->
+
+   }
+
+2. library
+
+   {
+
+   Entrance Text: " As you leave the Great Hall feeling surprising optimism about your journey and expect to find many treasures.  You travel a short way down the hall and turn to the door of an altogether different chamber.  A musty odor greets you before you have a chance to let go of the handle.  As you walk in the most remarkable thing about the room is rows and rows of books and tattered scrolls lining the walls.  All surfaces are covered in thick webbing that clings to you."
+
+   There is a door at the far end of the hall.
+
+   What do you do?
+
+   1. Search the room
+      1. response - You find xxx gold coins
+      2. You see something leaning against the wall.  Inspect it?
+         1. Response - you found a crossbow!  It is totally loaded with one bolt too.
+            1. (if toaster) Put the toaster down and pick up the crossbow?
+               1. You pick up the crossbow and move to the next room. -->
+            2. (if toaster) Ignore the crossbow and keep your beloved new toaster?
+               1. You keep your toaster and move to the next room. -->
+         2. Move to the next room (same as below)
+      3. Leave it alone and move on -->
+   2. Move to the next room
+      1. The door is covered in webbing.  What do you do?
+         1. Clear it with my hand
+            1. Response - EWW Your hand is sticky!  A giant spider screeches and climbs down the wall at you!  You sense its irritation as you may have destroyed its favorite hammock.
+               1. Judo Chop!
+                  1. You totally missed, but impressed by your sticky handed karate skillz the spider gives you a bow and walks off.  You continue on and receive xxxxx gold.
+               2. (if toaster) Bash it with a toaster!
+                  1. Response - Your toaster has a dent in it! The spider isn't amused and webs you up to eat for lunch.  You dead.  --> dead and return to start, -1 life
+               3. (if crossbow) Shoot one of its eight eyes out!
+                  1. Response - One eye down!  That should level the playing field!  The spider skitters away to nurse its wound, and you continue onward.  You receive xxxxx gold.
+         2. (if toaster) wave my toaster around in the webs
+            1. Response - The web is thick, and there is no lightly toasted bread going into this gross kitchen appliance now.  However, it did the job and you even noticed a shiny coin in your toaster!  You carry on you lucky dog!  You receive xx gold.  ---->
+         3. (if crossbow) wave my crossbow around in the webs
+            1. Response - You wave the stock of your crossbow around in the webs at the door, careful not to get the firing mechanism sticky.  A shadow moves above you and drops down behind you.
+               1. Dropkick it!
+                  1. You land feet first squarely into the face of a giant spider!  It rolls over and you race through the door and slam it shut!  You receive xx gold.
+               2. (if toaster) Bash it with a toaster!
+                  1. Response - Your toaster has a dent in it! The spider isn't amused and webs you up to eat for lunch.  You dead.  --> dead and return to start, -1 life
+               3. (if crossbow) Shoot one of its eight eyes out!
+                  1. Response - One eye down!  That should level the playing field!  The spider skitters away to nurse its wound, and you continue onward.  You receive xxxxx gold. -->
+
+   }
+
+3. guard chamber
+
+   {
+
+   Entrance Text: You continue down a corridor that begins to look less grand, and more drab, less decorative.  You enter a long room where the walls are lined with simple cots, each with a chest at the foot of the bed.  The room looks like it curves off to the left farther down.  In between each cot on the wall hangs a tattered banner with an old crest.  This appears to have been a dusty Guard Chamber.
+
+   What do you do?
+
+   1. Open a chest.
+
+      1. You walk down the room and pick a chest a little ways in.  You don't want to be tacky and loot the first chest you see do you?  You are an expert looter.
+
+         1. Response - You crack a chest open and as the chest is opened you see a gleam make it's way through,    covering your clothes in a shimmering golden light.  Your eyes go wide as you take in the sight before you.  A chest brimming with gold coins and gems!  You are captivated by the riches before you!
+
+            As you gawk at your new-found wealth you are grabbed roughly by your arms and dragged away.. Screaming..
+
+            - --> room +1, go to the chapel
+
+   2. Look for a way out
+
+      1. You travel down the corridor and as it curves you see a door, but before it stands a great armored knight, ready to do battle!  He stands still and regards you with a stare so cold you feel a shiver run up your spine.  Prepare yourself!  What do you do?
+
+         1. Karate time!
+
+            1. You approach the knight without fear and strike him with fury!  He cuts you down without mercy.  You dead.  --> lives -1, back to start
+
+         2. (if toaster)  Throw your toaster at his head!
+
+            1. The toaster clangs off his head and he stumbles!  You waste no time and rush past through the door, bolting it on the other side.  Resourceful! However, no toast.  Receive xx gold.
+
+               --> next room
+
+         3. (if crossbow) Fire your crossbow!
+
+            1. You take a shot at the knight and hit him right in the heart.  Turns out it was just an empty suit of armor, and it clangs to the floor.  Looks like your only ammo broke, and you are glad no one saw how stupid you looked just now.  You drop your empty crossbow and move on.  --> next room
+
+         4. (if sword) Cross swords with this fiend!
+
+         5. 
+
+   3. Search the room
+
+   }
+
+4. solar
+
+5. chapel
 
 ##### 
