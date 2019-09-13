@@ -283,28 +283,76 @@ A list of api calls that will be used by the game.
 
          1. Karate time!
 
-            1. You approach the knight without fear and strike him with fury!  He cuts you down without mercy.  You dead.  --> lives -1, back to start
+            1. Response: You approach the knight without fear and strike him with fury!  He cuts you down without mercy.  You dead.  --> lives -1, back to start
 
          2. (if toaster)  Throw your toaster at his head!
 
-            1. The toaster clangs off his head and he stumbles!  You waste no time and rush past through the door, bolting it on the other side.  Resourceful! However, no toast.  Receive xx gold.
+            1. Response: The toaster clangs off his head and he stumbles!  You waste no time and rush past through the door, bolting it on the other side.  Resourceful! However, no toast.  Receive xx gold.
 
                --> next room
 
          3. (if crossbow) Fire your crossbow!
 
-            1. You take a shot at the knight and hit him right in the heart.  Turns out it was just an empty suit of armor, and it clangs to the floor.  Looks like your only ammo broke, and you are glad no one saw how stupid you looked just now.  You drop your empty crossbow and move on.  --> next room
+            1. Response: You take a shot at the knight and hit him right in the heart.  Turns out it was just an empty suit of armor, and it clangs to the floor.  Looks like your only ammo broke, and you are glad no one saw how stupid you looked just now.  You drop your empty crossbow and move on.  --> next room
 
          4. (if sword) Cross swords with this fiend!
 
-         5. 
+            1. Response: The knight comes at you and slashes down at you viciously!  You bring the power from your mighty adventurer thighs and raise your blade to block your foe!  The swords connect in a shower of sparks and throw your opponent off balance.  You waste no time and drive your sword straight through his black heart!  You leave your sword in his chest and walk through the door.
 
    3. Search the room
+
+      1. You take some time to walk through the room a bit and observe your surroundings a bit more.  As you walk down the hall and peek around the corner you notice a burly figure standing in front of a door.  He doesn't seem to notice you.  Against the wall there leans a sword.  What do you do?
+         1. Take the sword
+            1. Response - The sword is large, but well balanced.  The blade is dull, but strong and the hilt is covered in ornate dragon-like designs.  You hook it to your belt and walk to the figure by the door.
+         2. Approach the figure
+            1. --> look for a way out stuff
 
    }
 
 4. solar
 
+   {
+
+   ​	Entrance Text: Through the door you have gone, and you begin to climb a set of dusty stone steps that spiral around in a tight spiral.  Clearly you are headed up to some tower.  As you walk through a set of heavy wooden doors you come into a room with decor that matches that of the Great Hall.  There sits a cauldron in the center of the room, a door to the left, and a bed in the far corner.  You sense there is no danger here.  What do you do?
+
+   1. Inspect the bed
+      1. Response: You walk over to the bed and have a look.  The bed is very ornate, fit for royalty.  You poke around the covers and find some gems. receive xxx gold
+   2. Inspect the cauldron
+      1. You approach the cauldron.  It is a large object made of a glimmering black metal, with two large rings at the sides hanging from well sculpted mouths of gargoyles.  When you take your eyes off them you feel a red glow from their sockets on the edge of your vision and feel a sense of unease.  As you draw closer you look inside and see a golden glowing translucent liquid.  What do you do?
+         1. Dip your hand in the cauldron
+            1. Response - As your hand touches the liquid it feels cool and refreshing like a cool breeze teasing through your hair that heralds the coming of Autumn.  You close your eyes and embrace the sensation.  You open them a second later and try to pull your hand out.  You look down and see that you cannot - the liquid is climbing up your arm and turning it to solid gold!  You struggle but to no avail, the magic has gripped you and your whole body is engulfed and turned to solid gold.  You turn your head to the sky and release a silent scream as the spell finishes its work and as your remaining eye is turned to gold everything goes black, and you know no more.  --> you dead.
+         2. (if toaster) Dip your toaster
+            1. Response - You dip your toaster into the liquid and from end to end it is turned into solid gold!  It is really heavy now, but worth a fortune!  You take your toaster and carry on through the door with a beaming smile. -->  receive xxxxx gold
+         3. (if crossbow) Dip your crossbow
+            1. Response - You dip the tip of your crossbow into the golden liquid, getting just the bolt wet.  The golden liquid surges up over the bolt and it turns solid gold!  It makes the crossbow heavier, but certainly is worth some money now!  You move on through the door.  -->  receive xxxx gold
+         4. (if sword) Dip your sword
+            1. Response - You brandish your sword in a flourish, trying to be dramatic before dipping the tip of the sword into the liquid to see what will happen.  As soon as you do there is a golden explosion of light as the sword is engulfed in the shimmery substance.  After the light dies down the sword blade has turned to gold, and the once dull dusty features have become like new!  You sense that some magical potential of this blade was unlocked and you move onward ready for whatever challenge awaits.  receive xxxx gold
+   3. Head through the door
+      1. Response - you open the door of the room and continue your quest.  As you step through the doorway your vision ripples as though reality is a pond and you are a stone.  You feel yourself falling, and then you hit something hard and everything goes dark.
+
+   }
+
 5. chapel
+
+   {
+
+   ​	Entrance Text:  You awaken from your last ordeal on a cold stone floor.  Raising your head with a groan you look around.  Through your pounding headache your vision begins to clear and you see a terrifying sight.  The room is covered in a sickly red light and what you can clearly see was once a beautiful soaring chapel is now invaded by a dark presence.  In the middle of the chapel is a great and terrifying dragon with row upon row of jagged teeth and scales as black as the night!  It leers down at you with a cold ruthless hunger.  You are seconds from being consumed!  What do you do?
+
+   1. Run away!
+      1. Response: You clamor to your feet and dart away as quickly as you can!  You take one step and the dragon snaps down!  Only one of your legs remains on the ground and the dragon slathers your remains across its greedy maw in a bloody mess.  --> you dead
+   2. (if toaster) Draw your toaster
+      1. Response: You reach for your weapon and realize you only have a toaster.  How silly.  The dragon flashes down and devours you.  There is nothing left.  --> you dead
+   3. (if upgraded toaster) Draw your golden toaster
+      1. Response: You hold up your golden toaster in a desperate defense against the terrible creature before you, and as it snaps down at you it stops suddenly and seems to admire its own reflection in your toaster.  Not one to waste an opportunity you slowly set the toaster down and leave.  You lose a golden toaster, but escape with your life.  --> return to start no lives lost, - xxxxxx gold
+   4. (if crossbow) Draw your crossbow
+      1. Response: From your back as the dragon moves to attack you whip out your crossbow and fire.  Luck is with you this day, and your bolt catches the back of the dragons throat.  It hacks and coughs at the bolt lodged in its throat.  Not a death blow, but you don't argue with your good fortune and race from the chapel with your life.  --> you dead
+   5. (if upgraded crossbow)  Draw your golden crossbow
+      1. Response: Remembering that you now have a magical crossbow you stand defiantly and face your gargantuan foe.  As the dragon rushes to the kill you level the crossbow to your eye and take aim.  You smirk defiantly at the beast and pull the trigger.  In an instant, the golden bolt clatters straight to the floor without so much as a bounce due to its weight, and you never even knew what happened before the dragon ended your journey. --> return to start  receive xx gold
+   6. (if sword) Draw your sword
+      1. Response: You jump to your feet and brandish your sword ready to die like a hero if that is what it comes to.  The dragon chomps down and you dive to the left rolling to a crouch and spring back at the dragon to slash at its exposed belly.  You strike and the sword clangs against the dragons hide ineffectively.  Blood splashes from your mouth as you feel claws the size of your sword punch into your back.  --> you dead.
+   7. (if upgraded sword) Draw your golden sword
+      1. Response: You lie on the ground, gripped with fear at the sight before you.  As the dragon bears down on you, slowly approaching and drooling rank, steaming globs of saliva onto the stone chapel floor you feel a swell of courage.  The courage you feel is coming from.. your sword?  Your golden sword seems now to be as hungry for the dragons blood as the dragon is for yours.  With more a feeling than a thought you bring the blade to bear.  Like a shining golden beacon in dark sea of despair you walk forward to do battle.  In two it is done, the dragon snaps its long neck down at you and you swing across knocking its massive jaws wide in a swing to the teeth.  You cross your sword back in the same instant and the dragons head falls to the floor.  The sword evaporates in your hand and light streams into the chapel.  The dragons neck erupts not with blood but with coins.  --> victory, receive xxxxxxx gold
+
+   }
 
 ##### 
