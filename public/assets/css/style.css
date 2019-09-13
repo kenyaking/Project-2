@@ -1,14 +1,95 @@
 html {
-
 }
+
 body {
+    background-color: rgba(62, 69, 78, 1.0);
+    height:100%;
 
 }
+h1 {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 4em;
+    color: white;
+}
+h2 {
+    font-family: 'Bungee Shade', cursive;
+    color: white;
+}
+h4 {
+    font-family: 'Bungee Shade', cursive;
+    color: white;
+}
+.startgame button {
+    font-family: 'Bungee Shade', cursive;
+    color: white;
+    font-size:2em;
+}
+.scroll img {
+    width:1000px;
+}
+.avatar {
+    opacity: 0.5;
+}
+.avatar:hover {
+    opacity: 1.0;
+}
+#avatar1 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") 0 0;
+}
+#avatar2 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") 0 -100px;
+}
+#avatar3 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") 0 -200px;
+}
+#avatar4 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") -100px 0;
+}
+#avatar5 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") -100px -100px;
+}
+#avatar6 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") -100px -200px;
+}
+#avatar7 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") -200px 0;
+}
+#avatar8 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") -200px -100px;
+}
+#avatar9 {
+    width: 100px;
+    height: 100px;
+    background: url("../images/avatars.png") -200px -200px;
+}
+.spacer {
+    margin: 10px 0 10px 0;
+}
+
 .tester {
     border: 2px solid black;
 }
 .block1 {
     height: 100px;
+}
+.block1-5 {
+    height: 150px;
 }
 .block2 {
     height: 200px;
@@ -24,4 +105,13 @@ body {
 }
 .block6 {
     height: 600px;
+}
+.stat {
+    height:25px;
+}
+
+#door-straight {
+    position: absolute;
+    left:50%;
+    top: 100px;
 }
