@@ -74,13 +74,13 @@ module.exports = function(app){
     app.get("/responses/:id", function(req, res){
         var responses_id = req.params.id
         var responses = items.find(function(element){ 
-        return element.id == responses_id
-    })
+            return element.id == responses_id
+        })
 
-    if(responses) res.json(responses)
-    else res.json({
-        message: "Response id does not exist"
-    })
+        if(responses) res.json(responses)
+        else res.json({
+            message: "Response id does not exist"
+        })
 
     })
 
@@ -130,8 +130,6 @@ module.exports = function(app){
 
     })
 
-    }
-
     // Changing health – three lives
 
     app.post("/chaningHealth", function(req, res){
@@ -173,3 +171,5 @@ module.exports = function(app){
         res.json(highScore[highScore_id])
 
     })
+
+    }
