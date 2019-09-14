@@ -15,8 +15,12 @@ module.exports = function(sequelize, DataTypes) {
       },
       TeamId: DataTypes.INTEGER,
       ItemId: DataTypes.INTEGER,
-      Lives: DataTypes.INTEGER,
+      Lives: {
+        type: DataTypes.INTEGER,
+        defaultValue: 3
+      },
       OpposingTeamId: DataTypes.INTEGER,
+      Gold : DataTypes.INTEGER
     },
     {
         timestamps: false
