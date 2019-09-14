@@ -108,7 +108,7 @@ The database will contain tables that define the player attributes, team attribu
 2. OptionText - varchar, NOT NULL
 3. OptionListId - int, FK, NOT NULL
 4. ResponseId - int, NOT NULL
-5. ResponseEnum - varchar
+5. ReqItemId- int,
 
 ###### OptionList Table(Table to identify all options in option table that should be grouped for an interaction)
 

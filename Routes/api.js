@@ -1,4 +1,5 @@
-var {rooms, items, players} = require("./data/test")
+var {rooms, items, players} = "";//require("./data/test")
+var db = require("../models");
 
 
 module.exports = function(app){
@@ -9,6 +10,30 @@ module.exports = function(app){
     
         res.json({room:rooms[random]})
     })
+
+    // GET starting room room- When this call is made the initial room will be provided to requestor  
+    app.get("/start", function(req, res){
+        db.Rooms.findOne({
+            where: {
+                RoomId: 1
+            }
+        }).then(function(dbRoom) {
+            res.json(dbRoom);
+        }); 
+    })
+
+    //get next room based on room id sent back, expect new roomId was calculated before ajax call from front end
+    app.get("/next/:roomid", function(req, res){
+        var newRoom = req.params.id;
+        
+        db.Rooms.findOne({
+            where: {
+                RoomId: newRoom
+            }
+        }).then(function(dbRoom) {
+            res.json(dbRoom);
+        });        
+    });
 
     // GET Item - Returns information about an Item in the room if Inspectable or if picked up
     app.get("/item/:id", function(req, res){
