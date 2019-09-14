@@ -64,7 +64,7 @@ optionListId INTEGER,
 isDoorway INTEGER NOT NULL,
 goldmultiplier INTEGER NULL,
 isDeath INTEGER NOT NULL,
-NewItemId INTEGER NOT NULL,
+NewItemId INTEGER,
 PRIMARY KEY (responseId)
 );
 
