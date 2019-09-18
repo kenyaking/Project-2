@@ -20,7 +20,10 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: 3
       },
       OpposingTeamId: DataTypes.INTEGER,
-      Gold : DataTypes.INTEGER
+      Gold : {
+        type: DataTypes.INTEGER,
+        defaultValue : 0
+      }
     },
     {
         timestamps: false
