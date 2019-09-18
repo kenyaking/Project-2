@@ -1,10 +1,10 @@
-var {rooms, items, players} = "";//require("./data/test")
+
 var db = require("../models");
 
 
 module.exports = function(app){
     // GET next room- When this call is made a random room will be selected and will provide the client with room information   
-    app.get("/next", function(req, res){
+    app.get("/api/next", function(req, res){
         var length = rooms.length
         var random = Math.floor(Math.random() * length) 
     
@@ -12,7 +12,7 @@ module.exports = function(app){
     })
 
     // GET starting room room- When this call is made the initial room will be provided to requestor  
-    app.get("/start", function(req, res){
+    app.get("/api/start", function(req, res){
         db.Rooms.findOne({
             where: {
                 RoomId: 1
@@ -23,7 +23,7 @@ module.exports = function(app){
     })
 
     //get next room based on room id sent back, expect new roomId was calculated before ajax call from front end
-    app.get("/next/:roomid", function(req, res){
+    app.get("/api/next/:roomid", function(req, res){
         var newRoom = req.params.id;
         
         db.Rooms.findOne({
@@ -50,7 +50,7 @@ module.exports = function(app){
     // })
 
         // GET Item - Returns information about an Item in the room if Inspectable or if picked up
-        app.get("/item/:id", function(req, res){
+        app.get("/api/item/:id", function(req, res){
 
             db.Items.findOne({
                 where: {
@@ -82,7 +82,7 @@ module.exports = function(app){
     // })
 
     // GET player - Returns information about the player
-    app.get("/player/:id",function(req, res){
+    app.get("/api/player/:id",function(req, res){
         var player_id = req.params.id
 
         db.Players.findOne({
@@ -114,7 +114,7 @@ module.exports = function(app){
     // })
 
     // GET Options - This will return options based on the optionListId that the player received from an option-response
-    app.get("/options/:id", function(req, res){
+    app.get("/api/options/:id", function(req, res){
         var options_id = req.params.id;
 
         db.GameOptions.findAll({
@@ -149,10 +149,11 @@ module.exports = function(app){
     // })
 
     //Will create a player, should only need a name, all other values can null or default at start
-    app.post("/player", function(req, res){
+    app.post("/api/player", function(req, res){
         var player = req.body
 
-        db.Players.create(req.body).then(function(dbPlayers) {
+        db.Players.create(player).then(function(dbPlayers) {
+            console.log("The response is \n ---------- \n" + dbPlayers.get({plain: true}));
             res.json(dbPlayers);
           });
     })
@@ -173,7 +174,7 @@ module.exports = function(app){
 
     // })
 
-    app.get("/responses/:id", function(req, res){
+    app.get("/api/responses/:id", function(req, res){
         var responses_id = req.params.id;
 
         db.Responses.findOne({
@@ -195,7 +196,7 @@ module.exports = function(app){
 
 
     // GET Team (MULTIPLAYER) - returns information about a team, either player or opponents if applicable
-    app.get("/team/:id",function(req, res){
+    app.get("/api/team/:id",function(req, res){
         var team_id = req.params.id
 
         var team = team.find(function(element){ 
@@ -209,7 +210,7 @@ module.exports = function(app){
     })
 
     // POST opposing team (MULTIPLAYER) - posts the opposing teamId based on get
-    app.post("/multiPlayer", function(req, res){
+    app.post("/api/multiPlayer", function(req, res){
         var multiPlayer = req.body
         var multiPlayer_id = multiPlayers.length + 1 
 
@@ -226,7 +227,7 @@ module.exports = function(app){
 
 
     // POST item - Sends item selection into player table
-    app.post("/grabitem", function(req, res){
+    app.post("/api/grabitem", function(req, res){
         var itemSelection = req.body
 
         Players.update({ ItemId: itemSelection.item }, {
@@ -255,7 +256,7 @@ module.exports = function(app){
 
     // Changing health – three lives
 
-    app.get("/lowerHP/:pid/:current", function(req, res){
+    app.get("/api/lowerHP/:pid/:current", function(req, res){
 
         var player = req.params.pid;
         var changeHP = req.params.current;
@@ -284,7 +285,7 @@ module.exports = function(app){
 
     // })
 
-    app.post("/gold/:pid", function(req, res){
+    app.post("/api/gold/:pid", function(req, res){
 
         var gold = req.body
 
@@ -313,7 +314,7 @@ module.exports = function(app){
     // })
 
     // Get high score - Select max from table. Get name and score of person
-    app.get("/highScore", function(req, res){
+    app.get("/api/highScore", function(req, res){
         var highScore = req.body
         var highScore_id = highScore.length + 1 
 
