@@ -3,6 +3,8 @@ $( document ).ready(function() {
 
     $("img").on("click", function() {
         playerAvatar = ($(this).attr("id"));
+        $("img.avatarSelected").removeClass("avatarSelected").addClass("avatar");
+        $(this).removeClass("avatar").addClass("avatarSelected")
       });
     
     
@@ -20,28 +22,25 @@ $( document ).ready(function() {
       function loadGamePage(data){
             var nextU = "/game/" + data.PlayerId;
             window.location.href = nextU;
+           
         };
     
     //listen for player name entry
     $("button#playGame").on("click", function() {
         event.preventDefault();
-        playerName = ($("#inputGroup-sizing-lg").val());
-    
+        playerName = ($("#playerName").val().trim());
         if (playerName !== "" && playerAvatar !== "") {
             setPlayer(playerName);
+            localStorage.setItem("name", playerName);
+            localStorage.setItem("avatar", playerAvatar);
+            
         } else {
             event.preventDefault();
             alert("Please enter your player name and choose an Avatar");
         }
     });
     
-      //this will cycle room images on submit
-      $("button#next").on("click", function() {
-        event.preventDefault();
-        console.log(currentPlayer);
-        var j = Math.floor(Math.random() * 5) + 1;
-        $("img.room").attr("id", "room" + j);
-      });
+      
     
     
     
