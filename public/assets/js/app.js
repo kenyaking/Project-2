@@ -1,8 +1,8 @@
-$( document ).ready(function() {
-
     var url = window.location.pathname;
     var playerAvatar;
     var playerName;
+
+    var state = "NEW";
 
     var currentPlayer;
     var currentRoom;
@@ -10,92 +10,24 @@ $( document ).ready(function() {
     var questionResponse;
     var playerResp;
 
-    if (url.indexOf("game/") !== -1) {
+    document.ready(function(){
+      if (url.indexOf("game/") !== -1) {
         console.log("something");
         playerId = url.split("/")[2];
         getPlayer(playerId);
-
-        updatePlayerElements(currentPlayer);
-
+  
+        //update UI elements based on player status
+        //updatePlayerElements(currentPlayer);
+  
+        //get initial room to start and store in currentRoom
         getStartingRoom();
-
-
-
-
+  
+        //get options for player based on starting room optionlist
+        //getOptions(currentRoom.optionListId);
+  
     }
+  })
 
-
-$("img").on("click", function() {
-    playerAvatar = ($(this).attr("id"));
-  });
-
-
-  function setPlayer(name) {
-    $.post("/api/player/", {Name: name})
-      .done(function(data){
-        playerResp = data;
-        console.log(playerResp);
-        
-        loadGame(data);
-      });
-  }
-
-  function getPlayer(playerId) {
-    $.get("/api/player/" + playerId, function() {
-      })
-        .done(function(response) {
-            console.log("player i got is: \n" + response.Name);
-            currentPlayer = new player(response.PlayerId, response.Name, response.TeamId, response.ItemId, response.Lives, response.Gold)
-            //TODO set starting room image here
-        })
-        .fail(function() {
-          console.log("Failed to get player with id: " + playerId);
-        })        
-  }
-
-  function getStartingRoom() {
-    $.get("api/start", function() {
-    })
-      .done(function(response) {
-          currentRoom = new room(response.RoomId, response.RoomName, response.EnterText, response.OptionListId);
-      })
-      .fail(function() {
-        console.log("Failed to get starting room");
-      })  
-  }
-
-
-
-  //loads new game url after player has entered a name and been entered to db
-  function loadGame(data){
-        var nextU = "/game/" + data.PlayerId;
-        window.location.href = nextU;
-    };
-
-//listen for player name entry
-$("button#playGame").on("click", function() {
-    event.preventDefault();
-    playerName = ($("#inputGroup-sizing-lg").val());
-
-    if (playerName !== "" && playerAvatar !== "") {
-        setPlayer(playerName);
-    } else {
-        event.preventDefault();
-        alert("Please enter your player name and choose an avatar");
-    }
-});
-
-  //this will cycle room images on submit
-  $("button#next").on("click", function() {
-    event.preventDefault();
-    console.log(currentPlayer);
-    var j = Math.floor(Math.random() * 5) + 1;
-    $("img.room").attr("id", "room" + j);
-  });
-
-
-
-});
 
 //Game Objects
 //----------------------------------------------------------------------------------------------
@@ -179,6 +111,42 @@ function updateNewRoom() {
 *********Game logic section
 **********************************************************************/
 
+function getPlayer(playerId) {
+  $.get("/api/player/" + playerId, function() {
+    })
+      .done(function(response) {
+          console.log("player i got is: \n" + response.Name);
+          currentPlayer = new player(response.PlayerId, response.Name, response.TeamId, response.ItemId, response.Lives, response.Gold)
+          //TODO set starting room image here
+          console.log(currentPlayer);
+      })
+      .fail(function() {
+        console.log("Failed to get player with id: " + playerId);
+      })
+}
+
+function getStartingRoom() {
+  $.get("/api/start", function() {
+  })
+    .done(function(response) {
+        currentRoom = new room(response.RoomId, response.RoomName, response.EnterText, response.OptionListId);
+    })
+    .fail(function() {
+      console.log("Failed to get starting room");
+    })  
+}
+
+function getNextRoom(roomId) {
+  $.get("/api/next/" + roomId, function() {
+  })
+    .done(function(response) {
+        currentRoom = new room(response.RoomId, response.RoomName, response.EnterText, response.OptionListId);
+    })
+    .fail(function() {
+      console.log("Failed to get starting room");
+    }) 
+}
+
 function getOptions(optionListId) {
     $.get("/api/options/" + optionListId, function() {
     })
@@ -219,11 +187,22 @@ function getResponses(responseId) {
 *********Game loop section
 **********************************************************************/
 
+function loadGame() {
+
+  switch(state) {
+    case "NEW" :
+      getPlayer
+  }
+}
+
 //Game loop
 function gameLoop() {
+  console.log("currentPlayer is: " + currentPlayer);
+  console.log("currentRoom is: " + currentRoom);
 
-    
-
+  currentOptions.forEach(element => {
+    console.log("option: " + element);
+  });
 }
 
 
@@ -241,3 +220,5 @@ window.onload = function() {
         console.log('jQuery is loaded');
     }
 }
+
+gameLoop();
