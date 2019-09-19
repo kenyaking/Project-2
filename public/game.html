@@ -19,10 +19,10 @@
   
     <div class="container-fluid">
         <div class="row">
-			<div class="col-12 spacer"></div>
-		</div>
-        <div class="row">
-			<div class="col-12 spacer"></div>
+			<div class="col-12 spacer">
+                    <button type="button" class="btn btn-primary" id="nextRoom">room image</button>
+                    <button type="button" class="btn btn-primary" id="nextItem">item image</button>
+            </div>
 		</div>
 		
         <div class="row">
@@ -33,12 +33,13 @@
 		</div>
         <div class="row">
             <div class="col-md-3">
+                    <p id="roomName"></p>
                     <p id="gameText">Reserved for game text</p>
                       <input type="radio" name="" id="" value="">text<br>
                     <button type="button" class="btn btn-primary" id="next">Submit</button>
             </div> 
             <div class="col-md-7">
-                    <img src="/assets/images/img-transRoom1000.png" class="img-fluid mx-auto d-block" id="room2" />
+                    <img src="/assets/images/img-transRoom1000.png" class="img-fluid mx-auto d-block room" id="room2" />
             </div>
             <div class="col-md-2">
                 <div class="row">
@@ -61,10 +62,10 @@
                         </div>
                         <div class="row">
                             <div class="col-3 stat">
-                                    <img src="/assets/images/sword.png" class="img-fluid">
+                                    <img src="/assets/images/none.png" class="img-fluid item">
                             </div>
                             <div class="col-6 stat">
-                                <p>sword</p>
+                                <p class="item">Nothing</p>
                             </div>
                         </div>
                     </div>
@@ -72,7 +73,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="d-flex flex-row flex-nowrap justify-content-left">
-							<img class="p-2" src="/assets/images/img-trans.png" id="avatar5">
+							<img class="p-2 avatarimg" src="/assets/images/img-trans.png" >
 							<h5 id="playerName"></h5>
 						</div>
 					</div>
@@ -99,6 +100,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- ***JavaScript file link*** -->
     <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/game.js"></script>
 
   </body>
 </html>
