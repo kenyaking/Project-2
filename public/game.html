@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- ***CSS file link*** -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"></link>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css"></link>
 
     <title>Mighty Dungeon Gold Gitter | Game Page</title>
   </head>
@@ -19,10 +19,10 @@
   
     <div class="container-fluid">
         <div class="row">
-			<div class="col-12 spacer"></div>
-		</div>
-        <div class="row">
-			<div class="col-12 spacer"></div>
+			<div class="col-12 spacer">
+                    <button type="button" class="btn btn-primary" id="nextRoom">room image</button>
+                    <button type="button" class="btn btn-primary" id="nextItem">item image</button>
+            </div>
 		</div>
 		
         <div class="row">
@@ -33,19 +33,20 @@
 		</div>
         <div class="row">
             <div id="game" class="col-md-3">
-
-                <form id="gameOptions"></form>
-                <button type="button" class="btn btn-primary" id="optionSubmit">Submit</button>
+                    <p id="roomName"></p>
+                   
+                    <form id="gameOptions"></form>
+                    <button type="button" class="btn btn-primary" id="next">Submit</button>
             </div> 
             <div class="col-md-7">
-                    <img src="assets/images/img-transRoom1000.png" class="img-fluid mx-auto d-block" id="room2" />
+                    <img src="/assets/images/img-transRoom1000.png" class="img-fluid mx-auto d-block room" id="room2" />
             </div>
             <div class="col-md-2">
                 <div class="row">
                     <div class="col-12 block1">
                         <div class="row">
                             <div class="col-3 stat">
-                                    <img src="assets/images/cross.png" class="img-fluid">
+                                    <img src="/assets/images/cross.png" class="img-fluid">
                             </div>
                             <div class="col-2 stat">
                                 <p>6</p>
@@ -53,7 +54,7 @@
                         </div>
                         <div class="row">
                             <div class="col-3 stat">
-                                    <img src="assets/images/gold.png" class="img-fluid">
+                                    <img src="/assets/images/gold.png" class="img-fluid">
                             </div>
                             <div class="col-6 stat">
                                 <p>60</p>
@@ -61,10 +62,10 @@
                         </div>
                         <div class="row">
                             <div class="col-3 stat">
-                                    <img src="assets/images/sword.png" class="img-fluid">
+                                    <img src="/assets/images/none.png" class="img-fluid item">
                             </div>
                             <div class="col-6 stat">
-                                <p>sword</p>
+                                <p class="item">Nothing</p>
                             </div>
                         </div>
                     </div>
@@ -72,7 +73,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="d-flex flex-row flex-nowrap justify-content-left">
-							<img class="p-2 playerAvatar" src="assets/images/img-trans.png" id="avatar5">
+							<img class="p-2 avatarimg" src="/assets/images/img-trans.png" >
 							<h5 id="playerName"></h5>
 						</div>
 					</div>
@@ -96,8 +97,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- ***JavaScript file link*** -->
-    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/game.js"></script>
 
   </body>
 </html>

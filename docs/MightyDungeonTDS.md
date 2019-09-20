@@ -90,7 +90,7 @@ The database will contain tables that define the player attributes, team attribu
 
 1. ItemId - int, auto, PK, NOT NULL
 2. ItemName - varchar, NOT NULL
-3. ItemAction - varchar, NOT NULL (action that this item can make when it is useable in a situation)
+3. ItemAction - varchar, NOT NULL (action that this item can make when it is use able in a situation)
 4. ItemText - varchar, (Text information about the item)
 5. OptionListId - int, NOT NULL
 

@@ -20,12 +20,13 @@
   <body>
 
 		<div class="video">
-			<video playsinline="playsinline" autoplay="autoplay"  muted="muted">
+			<video playsinline="playsinline" muted="muted">
+      <!-- <video playsinline="playsinline" autoplay="autoplay"  muted="muted"> -->
 				<source src="assets/videos/Pexels Videos 2386439.mp4" />
 			</video>
 		</div>
     <div class="overlay"></div>
-
+ 
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center spacer" id="title">
@@ -40,7 +41,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 spacer">
-                <input id="inputGroup-sizing-lg" type="text" class="form-control" placeholder="player name" aria-label="Your player name" aria-describedby="basic-addon2">    
+                <input id="playerName" type="text" class="form-control" placeholder="player name" aria-label="Your player name" aria-describedby="basic-addon2">    
             </div>
         </div>
         <div class="row">
@@ -61,11 +62,10 @@
           </div>
         <div class="row">
           <div class="col-md-12 text-center startgame spacer">
-            <a href="game.html"><button type="button" class="btn btn-primary" id="playGame">Play Game!</button></a>
+            <button type="button" class="btn btn-primary" id="playGame">Play Game!</button>
           </div>
         </div>
         <div class="row">
-
         </div>
     </div> 
 
@@ -82,6 +82,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <!-- ***JavaScript file link*** -->
+    <script type="text/javascript" src="assets/js/index.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
 
   </body>
