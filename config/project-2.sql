@@ -2,16 +2,71 @@ CREATE DATABASE project2_DB;
 USE project2_DB;
 
 CREATE TABLE players (
-playerid INTEGER NOT NULL AUTO_INCREMENT,
-playername VARCHAR(50) NULL,
-teamid INTEGER NOT NULL,
-points INTEGER NULL,
-weapon1 BOOLEAN NULL,
-PRIMARY KEY (playerid)
+playerId INTEGER NOT NULL AUTO_INCREMENT,
+playerName VARCHAR(50) NULL,
+teamId INTEGER NULL,
+gold INTEGER default 0,
+lives INTEGER default 3 NOT NULL,
+PRIMARY KEY (playerId)
 );
 
+USE project2_DB;
+CREATE TABLE teams (
+teamId INTEGER NOT NULL AUTO_INCREMENT,
+gold INTEGER NOT NULL,
+messageText TEXT NULL,
+isActive BOOLEAN NOT NULL,
+PRIMARY KEY (teamId)
+);
 
+USE project2_DB;
+CREATE TABLE items (
+itemId INTEGER NOT NULL AUTO_INCREMENT,
+itemName VARCHAR (100) NOT NULL,
+itemAction VARCHAR (500) NULL,
+itemText TEXT NOT NULL,
+optionListId INTEGER NULL,
+PRIMARY KEY (itemID)
+);
 
+USE project2_DB;
+CREATE TABLE optionList (
+optionListId INTEGER NOT NULL AUTO_INCREMENT,
+optionListName VARCHAR (100) NOT NULL,
+PRIMARY KEY (optionListId)
+);
+
+USE project2_DB;
+CREATE TABLE rooms (
+roomId INTEGER NOT NULL AUTO_INCREMENT,
+roomName VARCHAR (100) NOT NULL,
+enterText TEXT NOT NULL,
+optionListId INTEGER NOT NULL,
+isUnique BOOLEAN NOT NULL,
+PRIMARY KEY (roomId)
+);
+
+USE project2_DB;
+CREATE TABLE gameOptions (
+optionId INTEGER NOT NULL AUTO_INCREMENT,
+optionText TEXT NOT NULL,
+optionListId INTEGER NOT NULL,
+responseId INTEGER NOT NULL,
+reqItemId INTEGER,
+PRIMARY KEY (optionId)
+);
+
+USE project2_DB;
+CREATE TABLE responses (
+responseId INTEGER NOT NULL AUTO_INCREMENT,
+responseText TEXT NOT NULL,
+optionListId INTEGER,
+isDoorway INTEGER NOT NULL,
+goldmultiplier INTEGER NULL,
+isDeath INTEGER NOT NULL,
+NewItemId INTEGER,
+PRIMARY KEY (responseId)
+);
 
 
 
