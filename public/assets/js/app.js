@@ -14,7 +14,21 @@
 
       if (url.indexOf("game/") !== -1) {
         playerId = url.split("/")[2];
+<<<<<<< HEAD
         loadGame(playerId); 
+=======
+        getPlayer(playerId);
+  
+        //update UI elements based on player status
+        //updatePlayerElements(currentPlayer);
+  
+        //get initial room to start and store in currentRoom
+        getStartingRoom();
+  
+        //get options for player based on starting room optionlist
+        getOptions(currentRoom.optionListId);
+  
+>>>>>>> 92a59e4834caeec709562dbb4ed6ef73bf7c5765
     }
   })
 
@@ -76,19 +90,29 @@ function updatePlayerElements(player) {
 }
 
 //add new response text to text scroller UI
-function updateResponse(responseId) {
+function updateResponse(responseText) {
+  var text = "<p id='responseText'>"+ ResponseText +"</p>"   
 
+  $("#game").prepend(text)   
 }
 
 //add new options to radio selection in UI
-function updateOptions(optionListId) {
-
+function updateOptions(optionList) {  
+  var form = $("#gameOptions")
+  form.remove(".radioInput")
+  
+  for (var i = 0; i < optionList.length; i++){
+      form.append("<input class='radioInput' type='radio' name='options' >" + optionList[i].optionText + "<br>")
+  } 
 }
 
 //add new enter text to text scroller UI
 function updateEnterText(enterText) {
-
+  var entry = "<p id='enterText'>"+ enterText +"</p>"
+  
+  $("#game").prepend(entry) 
 }
+
 
 //room pic needs to be updated on room change
 function updateNewRoom() {
