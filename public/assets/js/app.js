@@ -15,6 +15,8 @@
         console.log("something");
         playerId = url.split("/")[2];
         getPlayer(playerId);
+
+        state = "START";
   
         //update UI elements based on player status
         //updatePlayerElements(currentPlayer);
@@ -101,6 +103,11 @@ function updateEnterText(enterText) {
 //room pic needs to be updated on room change
 function updateNewRoom() {
 
+}
+
+//function that returns player to start, or ends game based on life counter
+function dead() {
+  
 }
 
 /*********************************************************************
@@ -191,7 +198,8 @@ function loadGame() {
 
   switch(state) {
     case "NEW" :
-      getPlayer
+      getPlayer(currentPlayer.playerId);
+      break;
   }
 }
 
