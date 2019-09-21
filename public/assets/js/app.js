@@ -2,7 +2,7 @@
     var playerAvatar;
     var playerName;
 
-    var state = "NEW";
+    //var state = "NEW";
 
     var currentPlayer;
     var currentRoom;
@@ -13,28 +13,17 @@
     $( document ).ready(function() {
 
       if (url.indexOf("game/") !== -1) {
-        console.log("something");
         playerId = url.split("/")[2];
-        getPlayer(playerId);
-
-        state = "START";
-  
-        //update UI elements based on player status
-        //updatePlayerElements(currentPlayer);
-  
-        //get initial room to start and store in currentRoom
-        getStartingRoom();
-  
-        //get options for player based on starting room optionlist
-        //getOptions(currentRoom.optionListId);
-  
+        loadGame(playerId); 
     }
   })
 
 
-//Game Objects
-//----------------------------------------------------------------------------------------------
-function player(playerId, name, teamId, itemId, lives, gold) {
+
+//--------------------------------------------------------------------
+//--------------------------Game Objects------------------------------
+//--------------------------------------------------------------------
+function Player(playerId, name, teamId, itemId, lives, gold) {
     this.playerId = playerId;
     this.name = name;
     this.teamId = teamId;
@@ -43,14 +32,14 @@ function player(playerId, name, teamId, itemId, lives, gold) {
     this.gold = gold;
 }
 
-function room(roomId, roomName, enterText, optionListId) {
+function Room(roomId, roomName, enterText, optionListId) {
     this.roomId = roomId;
     this.roomName = roomName;
     this.enterText = enterText;
     this.optionListId = optionListId;
 }
 
-function gameOptions(optionId, optionText, optionListId, responseId, reqItemId) {
+function GameOptions(optionId, optionText, optionListId, responseId, reqItemId) {
     this.optionId = optionId;
     this.optionText = optionText;
     this.optionListId = optionListId;
@@ -58,7 +47,7 @@ function gameOptions(optionId, optionText, optionListId, responseId, reqItemId) 
     this.reqItemId = reqItemId;
 }
 
-function gameResponses(responseId, responseText, optionListId, isDoorway, goldMultiplier, isDeath) {
+function GameResponses(responseId, responseText, optionListId, isDoorway, goldMultiplier, isDeath) {
     this.responseId = responseId;
     this.responseText = responseText;
     this.optionListId = optionListId;
@@ -67,19 +56,19 @@ function gameResponses(responseId, responseText, optionListId, isDoorway, goldMu
     this.isDeath = isDeath;
 }
 
-function item(itemId, itemName, itemText) {
+function Item(itemId, itemName, itemText) {
     this.itemId = itemId;
     this.itemName = itemName;
     this.itemText = itemText;
 }
 
-//----------------------------------------------------------------------------------------------
-//End Game Objects
+//--------------------------------------------------------------------
+//-----------------------End Game Objects-----------------------------
+//--------------------------------------------------------------------
 
-
-/*********************************************************************
-*********UI update function section
-**********************************************************************/
+//--------------------------------------------------------------------
+//------------------UI update function section------------------------
+//--------------------------------------------------------------------
 
 //update player elements gold, lives, item based on changes to player object
 function updatePlayerElements(player) {
@@ -111,117 +100,170 @@ function dead() {
   
 }
 
-/*********************************************************************
-*********End UI update function section
-**********************************************************************/
+//--------------------------------------------------------------------
+//--------------End UI update function section------------------------
+//--------------------------------------------------------------------
 
-/*********************************************************************
-*********Game logic section
-**********************************************************************/
+//--------------------------------------------------------------------
+//--------------------Game API call section---------------------------
+//--------------------------------------------------------------------
 
-function getPlayer(playerId) {
-  $.get("/api/player/" + playerId, function() {
-    })
-      .done(function(response) {
-          console.log("player i got is: \n" + response.Name);
-          currentPlayer = new player(response.PlayerId, response.Name, response.TeamId, response.ItemId, response.Lives, response.Gold)
-          //TODO set starting room image here
-          console.log(currentPlayer);
-      })
-      .fail(function() {
-        console.log("Failed to get player with id: " + playerId);
-      })
-}
+const getPlayer = async (playerId) => {
 
-function getStartingRoom() {
-  $.get("/api/start", function() {
-  })
-    .done(function(response) {
-        currentRoom = new room(response.RoomId, response.RoomName, response.EnterText, response.OptionListId);
-    })
-    .fail(function() {
-      console.log("Failed to get starting room");
-    })  
-}
+  try {
 
-function getNextRoom(roomId) {
-  $.get("/api/next/" + roomId, function() {
-  })
-    .done(function(response) {
-        currentRoom = new room(response.RoomId, response.RoomName, response.EnterText, response.OptionListId);
-    })
-    .fail(function() {
-      console.log("Failed to get starting room");
-    }) 
-}
+    let response = await $.get("/api/player/" + playerId);
+    return await response;
 
-function getOptions(optionListId) {
-    $.get("/api/options/" + optionListId, function() {
-    })
-      .done(function(response) {
-          response.forEach(element => {
-              currentOptions.push(new gameOptions(element.OptionId, element.OptionText, element.OptionListId, element.ResponseId, element.ReqItemId));
-          });
-          updateOptions(currentOptions) 
-          console.log("getOptions response is: " + response);
-          console.log("getOptions currentOptions is: " + currentOptions);
-      })
-      .fail(function() {
-        console.log("Failed to get player with id: " + playerId);
-      })   
-}
-
-function getResponses(responseId) {
-    $.get("/api/responses/" + responseId, function() {
-    })
-      .done(function(response) {
-          questionResponse = new response(response.ResponseId, response.ResponseText, response.OptionListId, response.isDoorway, response.goldMultiplier, response.isDeath, response.NewItemId);
-          updateResponse(response.ResponseText);
-          console.log("getOptions response is: " + response);
-          console.log("getOptions currentOptions is: " + currentOptions);
-      })
-      .fail(function() {
-        console.log("Failed to get player with id: " + playerId);
-      })
-}
-
-
-
-/*********************************************************************
-*********Game logic section
-**********************************************************************/
-
-/*********************************************************************
-*********Game loop section
-**********************************************************************/
-
-function loadGame() {
-
-  switch(state) {
-    case "NEW" :
-      getPlayer(currentPlayer.playerId);
-      break;
+  } catch (err) {
+    console.log("Failed to get player with id: " + playerId + " " + err);
   }
+    
+}
+
+const getStartingRoom = async () => {
+
+  try {
+
+    let response = await $.get("/api/start")
+    return await response;
+
+  } catch (err) {
+    console.log("Failed to get player with id: " + playerId + " " + err);
+  }
+}
+
+const getNextRoom = async (roomId) => {
+  
+  try {
+    let response = await $.get("/api/next/" + roomId)
+    return await response;
+
+  } catch (err) {
+    console.log("Failed to get the next room with roomId: " + roomId);
+  }        
+}
+
+const getOptions = async (optionListId) => {
+    
+  try {
+    let response = await $.get("/api/options/" + optionListId)
+    return await response;
+
+  } catch (err) {
+    console.log("Failed to get options with id: " + OptionListId);
+  }
+}
+
+const getResponses = async (responseId) => {
+
+  try {
+    let response = await $.get("/api/responses/" + responseId)
+    return await response;
+  } catch (err) {
+    console.log("Failed to get response with id: " + responseId);
+  }
+    
+}
+
+
+
+//--------------------------------------------------------------------
+//-------------------End Game API call section------------------------
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+//-------------------Game loop section--------------------------------
+//--------------------------------------------------------------------
+
+const loadGame = async (playerId) => {
+
+  //get player info to start from id in URL and store in currentPlayer global var
+  const gotPlayer = await getPlayer(playerId);
+  console.log( gotPlayer );
+  currentPlayer = new Player(gotPlayer.PlayerId, gotPlayer.Name, gotPlayer.TeamId, gotPlayer.ItemId, gotPlayer.Lives, gotPlayer.Gold);
+  
+
+  //get initial room to start and store in currentRoom global var
+  const gotRoom = await getStartingRoom();
+  currentRoom = new Room(gotRoom.RoomId, gotRoom.RoomName, gotRoom.EnterText, gotRoom.OptionListId);
+
+  //load entrance text to page and update UI
+  //updateNewRoom()
+
+  //updatePlayerElements(currentPlayer);
+  //update UI elements based on player status
+  
+  // get options for player based on starting room optionlist
+  const gotOptions = await getOptions(currentRoom.optionListId);
+  gotOptions.forEach(element => {
+     currentOptions.push(new GameOptions(element.OptionId, element.OptionText, element.OptionListId, element.ResponseId, element.ReqItemId));
+  });
+
+  //load options onto page for player
+  //updateOptions(currentOptions);
+
+  
+  //console.log("currentOptions are " + currentOptions);
+  logObjectInfo();
 }
 
 //Game loop
 function gameLoop() {
-  console.log("currentPlayer is: " + currentPlayer);
-  console.log("currentRoom is: " + currentRoom);
+  //console.log("currentPlayer is: " + currentPlayer);
+  //console.log("currentRoom is: " + currentRoom);
 
-  currentOptions.forEach(element => {
-    console.log("option: " + element);
-  });
+  // currentOptions.forEach(element => {
+  //   console.log("option: " + element);
+
+
+  // questionResponse = new Response(response.ResponseId, response.ResponseText, response.OptionListId, response.isDoorway, response.goldMultiplier, response.isDeath, response.NewItemId);
+  //         updateResponse(response.ResponseText);
+  // });
+
+  //currentRoom = new Room(response.RoomId, response.RoomName, response.EnterText, response.OptionListId);
 }
 
 
 
-/*********************************************************************
-*********End game loop section
-**********************************************************************/
+//--------------------------------------------------------------------
+//--------------------End game loop section---------------------------
+//--------------------------------------------------------------------
 
 
+//--------------------------------------------------------------------
+//-------------------Helper section-----------------------------------
+//--------------------------------------------------------------------
+    
+    function objInfo(object) {
+      const objInfo = Object.entries(object);
+      var stringified = "";
 
+      objInfo.forEach(element => {
+        let key = element[0];
+        let value = element[1];
+    
+        stringified = stringified + key + ":" + value + "\n";
+    });
+
+      return stringified;
+    }
+
+    function logObjectInfo() {
+      var count = 1;
+      console.log("currentPlayer is " + objInfo(currentPlayer));
+      console.log("currentRoom is " + objInfo(currentRoom));
+      currentOptions.forEach(element => {
+        console.log("currentOption " + count + " is: " + objInfo(element));
+        count++;        
+      });
+      console.log("questionResponse is: " + questionResponse);
+    }
+
+
+//--------------------------------------------------------------------
+//-------------------End Helper section-------------------------------
+//--------------------------------------------------------------------
 
 // ***Test if jQuery is loading properly***
 window.onload = function() {
