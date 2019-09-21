@@ -64,6 +64,9 @@ h4 {
 .scroll img {
     width:1000px;
 }
+.avatarSelected {
+    opacity: 1.0;
+}
 .avatar {
     opacity: 0.5;
 }

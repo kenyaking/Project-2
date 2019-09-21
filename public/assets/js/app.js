@@ -10,7 +10,8 @@
     var questionResponse;
     var playerResp;
 
-    document.ready(function(){
+    $( document ).ready(function() {
+
       if (url.indexOf("game/") !== -1) {
         console.log("something");
         playerId = url.split("/")[2];
