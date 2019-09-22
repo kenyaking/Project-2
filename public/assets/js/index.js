@@ -28,7 +28,7 @@ $( document ).ready(function() {
     //listen for player name entry
     $("button#playGame").on("click", function() {
         event.preventDefault();
-        playerName = ($("#playerName").val().trim());
+        playerName = ($("#playerName").val().replace(/ /g, "").trim());
         if (playerName !== "" && playerAvatar !== "") {
             setPlayer(playerName);
             localStorage.setItem("name", playerName);
