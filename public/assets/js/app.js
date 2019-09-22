@@ -86,7 +86,7 @@ function updatePlayerElements(player) {
 function updateResponse(responseText) {
   var text = "<p id='responseText'>"+ responseText +"</p>"   
 
-  $("#game").prepend(text)
+  $("#game").append(text)
 }
 
 //add new options to radio selection in UI
@@ -105,23 +105,40 @@ function updateOptions(optionList) {
 function updateEnterText(enterText) {
   var entry = "<p id='enterText'>"+ enterText +"</p>"
   
-  $("#game").prepend(entry) 
+  $("#game").append(entry) 
 }
 
 
 //room pic needs to be updated on room change
-function updateNewRoom() {
-
+function updateNewRoom(roomId) {
+  var roomImageId = ["room1","room2","room3","room4","room5"];
+  var roomImage = ["Chapel","Great Hall","Guard Chamber","Library","Solar"];
+  var j = Math.floor(Math.random() * 5);
+  $("img.room").attr("id", roomImageId[j]);
+  $("p#roomName").text(roomImage[j]);
 }
 
 //Give some gold to the player
 function giveGold(multiplier, player) {
-  
+  var gold = Math.ciel(Math.random() * 100) * multiplier;
+
+  var text = "<p id='responseText'>You found " + gold + "!</p>";
+  currentPlayer.gold += gold;
+  $("#game").append(text);
 }
 
 //function that returns player to start, or ends game based on life counter
 function dead() {
-  
+  alert("GAME OVER");
+  window.location.href = "/";  
+}
+
+function updatePlayerItem(itemId) {
+  var items = ["toaster","crossbow","sword","none","golden_toaster","golden_crossbow","golden_sword"];
+  var itemName = ["Toaster", "Crossbow", "Sword", "Nothing", "Golden Toaster", "Golden Crossbow", "Golden Sword"];
+
+  $("img.item").attr("src", "/assets/images/" + items[itemId] + ".png");
+  $("p.item").text(itemName[itemId]);
 }
 
 //--------------------------------------------------------------------
@@ -265,27 +282,36 @@ const gameLoop = async (optionResponseId) => {
     currentPlayer.Lives -= 1;
       if(currentPlayer.Lives <= 0)
       {
-        alert("GAME OVER");
+        dead();
       }
   }
 
   updateResponse(questionResponse.responseText);
   scoreGold(gotResponse.goldMultiplier, currentPlayer);
 
+  if(questionResponse.NewItemId !== null) {
+    currentPlayer.ItemId = questionResponse.NewItemId;
+    updatePlayerItem(questionResponse.NewItemId);
+  }
+
   if(questionResponse.isDoorway > 0) {
-    optionGrab = currentRoom.RoomId + questionResponse.isDoorway;
+    const gotRoom = await getNextRoom(optionResponseId);
+    currentRoom = new Room(gotRoom.RoomId, gotRoom.RoomName, gotRoom.EnterText, gotRoom.OptionListId);
+    optionGrab = currentRoom.optionListId;
+    
   }
   else {
     optionGrab = questionResponse.OptionListId;
   }
+  
+  const gotOptions = await getOptions(optionGrab);
+  gotOptions.forEach(element => {
+
+     currentOptions.push(new GameOptions(element.OptionId, element.OptionText, element.OptionListId, element.ResponseId, element.ReqItemId));
+  });
 
 
-
-
-  // const gotOptions = await getOptions(currentRoom.optionListId);
-  // gotOptions.forEach(element => {
-  //    currentOptions.push(new GameOptions(element.OptionId, element.OptionText, element.OptionListId, element.ResponseId, element.ReqItemId));
-  // });
+  
 
 
   
