@@ -34,7 +34,10 @@
         <div class="row">
             <div id="game" class="col-md-3">
                     <p id="roomName"></p>
-                   
+                    <div class="card text-white h-75 bg-secondary mb-3">
+                        <div class="card-body overflow-auto" id="textScroller">
+                        </div>
+                      </div>
                     <form id="gameOptions"></form>
                     <button type="button" class="btn btn-primary" id="next">Submit</button>
             </div> 
@@ -49,7 +52,7 @@
                                     <img src="/assets/images/cross.png" class="img-fluid">
                             </div>
                             <div class="col-2 stat">
-                                <p>6</p>
+                                <p id="lifeCount"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -57,7 +60,7 @@
                                     <img src="/assets/images/gold.png" class="img-fluid">
                             </div>
                             <div class="col-6 stat">
-                                <p>60</p>
+                                <p id="goldCount"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -65,7 +68,7 @@
                                     <img src="/assets/images/none.png" class="img-fluid item">
                             </div>
                             <div class="col-6 stat">
-                                <p class="item">Nothing</p>
+                                <p class="item"></p>
                             </div>
                         </div>
                     </div>

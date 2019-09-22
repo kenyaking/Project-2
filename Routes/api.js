@@ -24,7 +24,7 @@ module.exports = function(app){
 
     //get next room based on room id sent back, expect new roomId was calculated before ajax call from front end
     app.get("/api/next/:roomid", function(req, res){
-        var newRoom = req.params.id;
+        var newRoom = req.params.roomid;
         
         db.Rooms.findOne({
             where: {
