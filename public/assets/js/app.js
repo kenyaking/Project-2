@@ -14,21 +14,7 @@
 
       if (url.indexOf("game/") !== -1) {
         playerId = url.split("/")[2];
-<<<<<<< HEAD
         loadGame(playerId); 
-=======
-        getPlayer(playerId);
-  
-        //update UI elements based on player status
-        //updatePlayerElements(currentPlayer);
-  
-        //get initial room to start and store in currentRoom
-        getStartingRoom();
-  
-        //get options for player based on starting room optionlist
-        getOptions(currentRoom.optionListId);
-  
->>>>>>> 92a59e4834caeec709562dbb4ed6ef73bf7c5765
     }
   })
 
@@ -190,6 +176,16 @@ const getResponses = async (responseId) => {
     
 }
 
+const getItem = async (itemId) => {
+
+  try {
+    let response = await $.get("/api/item/" + itemId)
+    return await response;
+  } catch (err) {
+    console.log("Failed to get item with id: " + itemId);
+  }
+}
+
 
 
 //--------------------------------------------------------------------
@@ -215,8 +211,8 @@ const loadGame = async (playerId) => {
   //load entrance text to page and update UI
   //updateNewRoom()
 
-  //updatePlayerElements(currentPlayer);
   //update UI elements based on player status
+  //updatePlayerElements(currentPlayer);
   
   // get options for player based on starting room optionlist
   const gotOptions = await getOptions(currentRoom.optionListId);
