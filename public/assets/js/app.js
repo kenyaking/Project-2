@@ -19,26 +19,6 @@ $( document ).ready(function() {
   $("h5#playerName").text(name);
   $("img.avatarimg").attr("id", avatar);
 
-  //this will cycle room images on submit
-  $("button#nextRoom").on("click", function() {
-    event.preventDefault();
-    var roomImageId = ["room1","room2","room3","room4","room5"];
-    var roomImage = ["Chapel","Great Hall","Guard Chamber","Library","Solar"];
-    var j = Math.floor(Math.random() * 5);
-    $("img.room").attr("id", roomImageId[j]);
-    $("p#roomName").text(roomImage[j]);
-  });
-  
-  //this will cycle item images on submit
-  $("button#nextItem").on("click", function() {
-    event.preventDefault();
-    var items = ["toaster","crossbow","sword","golden_toaster","golden_crossbow","golden_sword","none"];
-    var itemName = ["Toaster", "Crossbow", "Sword", "Golden Toaster", "Golden Crossbow", "Golden Sword", "Nothing"];
-    var k = Math.floor(Math.random() * 7);
-    $("img.item").attr("src", "/assets/images/" + items[k] + ".png");
-    $("p.item").text(itemName[k]);
-  });  
-
   if (url.indexOf("game/") !== -1) {
       playerId = url.split("/")[2];
       loadGame(playerId); 
@@ -74,7 +54,7 @@ function GameOptions(optionId, optionText, optionListId, responseId, reqItemId) 
     this.reqItemId = reqItemId;
 }
 
-function GameResponses(responseId, responseText, optionListId, isDoorway, goldMultiplier, isDeath) {
+function GameResponse(responseId, responseText, optionListId, isDoorway, goldMultiplier, isDeath) {
     this.responseId = responseId;
     this.responseText = responseText;
     this.optionListId = optionListId;
@@ -104,18 +84,20 @@ function updatePlayerElements(player) {
 
 //add new response text to text scroller UI
 function updateResponse(responseText) {
-  var text = "<p id='responseText'>"+ ResponseText +"</p>"   
+  var text = "<p id='responseText'>"+ responseText +"</p>"   
 
-  $("#game").prepend(text)   
+  $("#game").prepend(text)
 }
 
 //add new options to radio selection in UI
 function updateOptions(optionList) {  
   var form = $("#gameOptions")
   form.remove(".radioInput")
+
+  var radioIdValue = "resId_"; 
   
   for (var i = 0; i < optionList.length; i++){
-      form.append("<input class='radioInput' type='radio' name='options' >" + optionList[i].optionText + "<br>")
+      form.append("<input class='radioInput' type='radio' name='options' value='"+ radioIdValue + optionList[i].responseId + "'>" + optionList[i].optionText + "<br>")
   } 
 }
 
@@ -130,6 +112,11 @@ function updateEnterText(enterText) {
 //room pic needs to be updated on room change
 function updateNewRoom() {
 
+}
+
+//Give some gold to the player
+function giveGold(multiplier, player) {
+  
 }
 
 //function that returns player to start, or ends game based on life counter
@@ -213,6 +200,16 @@ const getItem = async (itemId) => {
   }
 }
 
+const setItem = async (playerId, itemId) => {
+  
+  try {
+    let response = await $.post("/api/player/", {PlayerId: playerId, ItemId: itemId})
+    return await response;
+  } catch (err) {
+    console.log("Failed to set item to player");
+  }    
+}
+
 
 
 //--------------------------------------------------------------------
@@ -236,6 +233,7 @@ const loadGame = async (playerId) => {
   currentRoom = new Room(gotRoom.RoomId, gotRoom.RoomName, gotRoom.EnterText, gotRoom.OptionListId);
 
   //load entrance text to page and update UI
+  updateEnterText(currentRoom.enterText);
   //updateNewRoom()
 
   //update UI elements based on player status
@@ -248,7 +246,7 @@ const loadGame = async (playerId) => {
   });
 
   //load options onto page for player
-  //updateOptions(currentOptions);
+  updateOptions(currentOptions);
 
   
   //console.log("currentOptions are " + currentOptions);
@@ -256,15 +254,41 @@ const loadGame = async (playerId) => {
 }
 
 //Game loop
-function gameLoop() {
-  //console.log("currentPlayer is: " + currentPlayer);
-  //console.log("currentRoom is: " + currentRoom);
+const gameLoop = async (optionResponseId) => {
+  var optionGrab;
 
-  // currentOptions.forEach(element => {
-  //   console.log("option: " + element);
+  const gotResponse = await getResponses(optionResponseId);
+  questionResponse = new GameResponse(gotResponse.ResponseId, gotResponse.ResponseText, gotResponse.OptionListId, gotResponse.isDoorway, gotResponse.goldMultiplier, gotResponse.isDeath, gotResponse.NewItemId);
+
+  if(questionResponse.isDeath) {
+    //have a place in db to store lives, but not necessary @version1
+    currentPlayer.Lives -= 1;
+      if(currentPlayer.Lives <= 0)
+      {
+        alert("GAME OVER");
+      }
+  }
+
+  updateResponse(questionResponse.responseText);
+  scoreGold(gotResponse.goldMultiplier, currentPlayer);
+
+  if(questionResponse.isDoorway > 0) {
+    optionGrab = currentRoom.RoomId + questionResponse.isDoorway;
+  }
+  else {
+    optionGrab = questionResponse.OptionListId;
+  }
 
 
-  // questionResponse = new Response(response.ResponseId, response.ResponseText, response.OptionListId, response.isDoorway, response.goldMultiplier, response.isDeath, response.NewItemId);
+
+
+  // const gotOptions = await getOptions(currentRoom.optionListId);
+  // gotOptions.forEach(element => {
+  //    currentOptions.push(new GameOptions(element.OptionId, element.OptionText, element.OptionListId, element.ResponseId, element.ReqItemId));
+  // });
+
+
+  
   //         updateResponse(response.ResponseText);
   // });
 
@@ -312,11 +336,47 @@ function gameLoop() {
 //-------------------End Helper section-------------------------------
 //--------------------------------------------------------------------
 
+//--------------------------------------------------------------------
+//-------------------Listener section---------------------------------
+//--------------------------------------------------------------------
+
+$("button#next").on("click", function() {
+  event.preventDefault();
+  //get selected response value and parse out 
+  var optionResponseId = $( "input:checked" ).val().split('_')[1];
+  console.log(optionResponseId); 
+  
+  gameLoop(optionResponseId);
+  
+});
+
+//this will cycle room images on submit
+$("button#nextRoom").on("click", function() {
+  event.preventDefault();
+  var roomImageId = ["room1","room2","room3","room4","room5"];
+  var roomImage = ["Chapel","Great Hall","Guard Chamber","Library","Solar"];
+  var j = Math.floor(Math.random() * 5);
+  $("img.room").attr("id", roomImageId[j]);
+  $("p#roomName").text(roomImage[j]);
+});
+
+//this will cycle item images on submit
+$("button#nextItem").on("click", function() {
+  event.preventDefault();
+  var items = ["toaster","crossbow","sword","golden_toaster","golden_crossbow","golden_sword","none"];
+  var itemName = ["Toaster", "Crossbow", "Sword", "Golden Toaster", "Golden Crossbow", "Golden Sword", "Nothing"];
+  var k = Math.floor(Math.random() * 7);
+  $("img.item").attr("src", "/assets/images/" + items[k] + ".png");
+  $("p.item").text(itemName[k]);
+});  
+
+//--------------------------------------------------------------------
+//-------------------Listener section---------------------------------
+//--------------------------------------------------------------------
+
 // ***Test if jQuery is loading properly***
 window.onload = function() {
     if (window.jQuery) {
         console.log('jQuery is loaded');
     }
 }
-
-gameLoop();
