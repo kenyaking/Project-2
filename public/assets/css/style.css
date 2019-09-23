@@ -119,11 +119,11 @@ h4 {
     background: url("../images/avatars.png") -200px -200px;
 }
 #room1 {
-	background: url("../images/chapel_scribble_wdoors.jpg") no-repeat;
+    background: url("../images/great hall_scribble_wdoors.jpg") no-repeat;
 	background-size: contain;
 }
 #room2 {
-	background: url("../images/great hall_scribble_wdoors.jpg") no-repeat;
+	background: url("../images/library_scribble_wdoors.jpg") no-repeat;
 	background-size: contain;
 }
 #room3 {
@@ -131,11 +131,11 @@ h4 {
 	background-size: contain;
 }
 #room4 {
-	background: url("../images/library_scribble_wdoors.jpg") no-repeat;
+    background: url("../images/solar_scribble_wdoors.jpg") no-repeat;
 	background-size: contain;
 }
 #room5 {
-	background: url("../images/solar_scribble_wdoors.jpg") no-repeat;
+    background: url("../images/chapel_scribble_wdoors.jpg") no-repeat;
 	background-size: contain;
 }
 .spacer {
@@ -171,4 +171,8 @@ h4 {
     position: absolute;
     left:50%;
     top: 100px;
+}
+
+#game {
+    max-height: 700px;
 }
