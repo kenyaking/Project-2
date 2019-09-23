@@ -293,6 +293,7 @@ const gameLoop = async (optionResponseId) => {
   if (questionResponse.isDeath) {
     //we have a place in db to store lives, but not necessary @version1
     currentPlayer.Lives -= 1;
+    updatePlayerElements(currentPlayer);
     if (currentPlayer.Lives <= 0) {
       dead();
     }
