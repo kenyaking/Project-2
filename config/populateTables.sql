@@ -1,5 +1,5 @@
-USE project2_DB;
-INSERT INTO optionList (optionListName)
+USE **dbname**;
+INSERT INTO OptionLists (optionListName)
 VALUES ("Entrance options to great hall"),
 ("response options to great hall room search"),
 ("Found toaster options"),
@@ -18,7 +18,7 @@ VALUES ("Entrance options to great hall"),
 ("Inspected the cauldron"),
 ("Entrance options to Chapel");
 
-INSERT INTO responses (responseText, optionListId, isDoorway, goldMultiplier, isDeath, NewItemId)
+INSERT INTO Responses (responseText, optionListId, isDoorway, goldMultiplier, isDeath, NewItemId)
 VALUES ("You are surprised to see that everything around the grand room is in impeccable condition. You would suspect that someone lives here still, but the ghostly light from the torches make you hesitant to settle on that thought.", 2, 0, 0, 0, NULL),
 ("You cross the room towards the door hoping to find some great treasure. There is no turning back now.", NULL, 1, 0, 0, NULL),
 ("You found a toaster!", 3, 0, 1, 0, NULL),
@@ -64,7 +64,7 @@ VALUES ("You are surprised to see that everything around the grand room is in im
 ("You lie on the ground, gripped with fear at the sight before you. As the dragon bears down on you, slowly approaching and drooling rank, steaming globs of saliva onto the stone chapel floor you feel a swell of courage. The courage you feel is coming from.. your sword? Your golden sword seems now to be as hungry for the dragons blood as the dragon is for yours. With more a feeling than a thought you bring the blade to bear. Like a shining golden beacon in dark sea of despair you walk forward to do battle. In two it is done, the dragon snaps its long neck down at you and you swing across knocking its massive jaws wide in a swing to the teeth. You cross your sword back in the same instant and the dragons head falls to the floor. The sword evaporates in your hand and light streams into the chapel. The dragons neck erupts not with blood but with coins.", NULL, 0, 7, 0, NULL);
 
 
-INSERT INTO rooms (roomName, enterText, optionListId, isUnique)
+INSERT INTO Rooms (roomName, enterText, optionListId, isUnique)
 VALUES ("Great Hall", "You enter the time-worn gates of the old castle. Almost immediately ornate sconces along the wall spring to life with bright blue flames. The fire light adds an eerie luminescence to the chamber. While the outside was decrepit and old looking, the Great Hall before you is beautiful and enchanting.", 1, 1),
 ("library", "As you leave the Great Hall feeling surprising optimism about your journey and expect to find many treasures. You travel a short way down the hall and turn to the door of an altogether different chamber. A musty odor greets you before you have a chance to let go of the handle. As you walk in the most remarkable thing about the room is rows and rows of books and tattered scrolls lining the walls. All surfaces are covered in thick webbing that clings to you.  There is a door at the far end of the hall.
 
@@ -74,7 +74,7 @@ What do you do?", 4, 1),
 ("Chapel", "You awaken from your last ordeal on a cold stone floor. Raising your head with a groan you look around. Through your pounding headache your vision begins to clear and you see a terrifying sight. The room is covered in a sickly red light and what you can clearly see was once a beautiful soaring chapel is now invaded by a dark presence. In the middle of the chapel is a great and terrifying dragon with row upon row of jagged teeth and scales as black as the night! It leers down at you with a cold ruthless hunger. You are seconds from being consumed! What do you do?", 17, 1);
 
 
-INSERT INTO items (itemName, itemText)
+INSERT INTO Items (itemName, itemText)
 VALUES ("Toaster", "A shiny red appliance that toasts bread.  The surfaces are smooth and flowing in design.  Looking at the toaster a word comes to mind - retro."),
 ("Crossbow", "A medieval weapon that uses mechanics of sturdy wood and springy metals to propel a sharp object at a deadly speed."),
 ("Sword", "A shiny double edged longsword that makes you feel dangerous."),
@@ -84,7 +84,7 @@ VALUES ("Toaster", "A shiny red appliance that toasts bread.  The surfaces are s
 ("Golden Sword", "A golden sword!  You can sense its power.");
 
 
-INSERT INTO gameOptions (optionText, optionListId, responseId, reqItemId)
+INSERT INTO GameOptions (optionText, optionListId, responseId, reqItemId)
 VALUES ("Search the room", 1, 1, NULL),
 ("Move to the next room", 1, 2, NULL),
 ("You see an item gleaming near the corner by the door", 2, 3, NULL),
