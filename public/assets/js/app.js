@@ -297,7 +297,27 @@ const gameLoop = async (optionResponseId) => {
       dead();
     }
     else {
-      loadGame(currentPlayer.playerId);
+      //get initial room to start and store in currentRoom global var
+      const gotRoom = await getStartingRoom();
+      currentRoom = new Room(gotRoom.RoomId, gotRoom.RoomName, gotRoom.EnterText, gotRoom.OptionListId);
+
+      //load entrance text to page and update UI
+      updateEnterText(currentRoom.enterText);
+
+      $("#textScroller").append("\n ~-------------------------------------~ \n");
+      $("#textScroller").scrollTop($("#textScroller").prop("scrollHeight"));
+
+      //update UI elements based on player status
+      updatePlayerElements(currentPlayer);
+
+      // get options for player based on starting room optionlist
+      const gotOptions = await getOptions(currentRoom.optionListId);
+      gotOptions.forEach(element => {
+        currentOptions.push(new GameOptions(element.OptionId, element.OptionText, element.OptionListId, element.ResponseId, element.ReqItemId));
+      });
+
+      //load options onto page for player
+      updateOptions(currentOptions);
     }
   }
   console.log("questionResponse is: " + objInfo(questionResponse));
