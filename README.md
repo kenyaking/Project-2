@@ -16,8 +16,9 @@ FEATURES
 •	Text-based challenges per dungeon room
 •	Games of 1; and games of 1 versus 1
 •	An indicator of any item (option) that the player is carrying such as a  
-    crossbow, mace, lantern, etc., to aid player along the journey
-•	Enemies such as a demon, dragon, giant spider, and others to confront player
+    crossbow, toaster, and a sword to aid player along the journey
+•	Enemies such as a knight, dragon, giant spider, and others to confront   
+    player
 •	A player health bar with a number starting at 3/3 to denote the number of 
     lives remaining
 •	A display showing how much gold a player has collected
