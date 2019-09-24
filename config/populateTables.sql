@@ -61,8 +61,8 @@ VALUES ("You are surprised to see that everything around the grand room is in im
 ("From your back as the dragon moves to attack you whip out your crossbow and fire. Luck is with you this day, and your bolt catches the back of the dragons throat. It hacks and coughs at the bolt lodged in its throat. Not a death blow, but you don't argue with your good fortune and race from the chapel with your life.", NULL, 0, 0, 1, NULL),
 ("Remembering that you now have a magical crossbow you stand defiantly and face your gargantuan foe. As the dragon rushes to the kill you level the crossbow to your eye and take aim. You smirk defiantly at the beast and pull the trigger. In an instant, the golden bolt clatters straight to the floor without so much as a bounce due to its weight, and you never even knew what happened before the dragon ended your journey.", NULL, 0, 2, 1, NULL),
 ("You jump to your feet and brandish your sword ready to die like a hero if that is what it comes to. The dragon chomps down and you dive to the left rolling to a crouch and spring back at the dragon to slash at its exposed belly. You strike and the sword clangs against the dragons hide ineffectively. Blood splashes from your mouth as you feel claws the size of your sword punch into your back.", NULL, 0, 0, 1, NULL),
-("You lie on the ground, gripped with fear at the sight before you. As the dragon bears down on you, slowly approaching and drooling rank, steaming globs of saliva onto the stone chapel floor you feel a swell of courage. The courage you feel is coming from.. your sword? Your golden sword seems now to be as hungry for the dragons blood as the dragon is for yours. With more a feeling than a thought you bring the blade to bear. Like a shining golden beacon in dark sea of despair you walk forward to do battle. In two it is done, the dragon snaps its long neck down at you and you swing across knocking its massive jaws wide in a swing to the teeth. You cross your sword back in the same instant and the dragons head falls to the floor. The sword evaporates in your hand and light streams into the chapel. The dragons neck erupts not with blood but with coins.", NULL, 0, 7, 0, NULL);
-
+("You lie on the ground, gripped with fear at the sight before you. As the dragon bears down on you, slowly approaching and drooling rank, steaming globs of saliva onto the stone chapel floor you feel a swell of courage. The courage you feel is coming from.. your sword? Your golden sword seems now to be as hungry for the dragons blood as the dragon is for yours. With more a feeling than a thought you bring the blade to bear. Like a shining golden beacon in dark sea of despair you walk forward to do battle. In two it is done, the dragon snaps its long neck down at you and you swing across knocking its massive jaws wide in a swing to the teeth. You cross your sword back in the same instant and the dragons head falls to the floor. The sword evaporates in your hand and light streams into the chapel. The dragons neck erupts not with blood but with coins.", NULL, 0, 7, 0, NULL),
+("You land feet first squarely into the face of a giant spider!  It rolls over and you race through the door and slam it shut!", NULL, 1, 2, 0, NULL);
 
 INSERT INTO Rooms (roomName, enterText, optionListId, isUnique)
 VALUES ("Great Hall", "You enter the time-worn gates of the old castle. Almost immediately ornate sconces along the wall spring to life with bright blue flames. The fire light adds an eerie luminescence to the chamber. While the outside was decrepit and old looking, the Great Hall before you is beautiful and enchanting.", 1, 1),
@@ -105,7 +105,7 @@ VALUES ("Search the room", 1, 1, NULL),
 ("Judo Chop!", 8, 16, NULL),
 ("Bash it with a toaster!", 8, 17, 1),
 ("Shoot one of its eight eyes out!", 8, 18, 2),
-("Dropkick it!", 9, 19, NULL),
+("Dropkick it!", 9, 44, NULL),
 ("Shoot it!", 9, 18, NULL),
 ("Open a chest.", 10, 19, NULL),
 ("Look for a way out", 10, 20, NULL),
