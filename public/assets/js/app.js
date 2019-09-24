@@ -110,6 +110,7 @@ function updateEnterText(enterText) {
 
 //room pic needs to be updated on room change
 function updateNewRoom(roomId) {
+  roomId -= 1;
   var roomImageId = ["room1", "room2", "room3", "room4", "room5"];
   var roomImage = ["Great Hall", "Library", "Guard Chamber", "Solar", "Chapel"];
 
@@ -292,15 +293,19 @@ const gameLoop = async (optionResponseId) => {
 
   if (questionResponse.isDeath) {
     //we have a place in db to store lives, but not necessary @version1
-    currentPlayer.Lives -= 1;
+    currentPlayer.lives -= 1;
+    currentPlayer.itemId = null;
     updatePlayerElements(currentPlayer);
-    if (currentPlayer.Lives <= 0) {
+    if (currentPlayer.lives <= 0) {
       dead();
     }
     else {
       //get initial room to start and store in currentRoom global var
       const gotRoom = await getStartingRoom();
       currentRoom = new Room(gotRoom.RoomId, gotRoom.RoomName, gotRoom.EnterText, gotRoom.OptionListId);
+
+      updateNewRoom(currentRoom.roomId);
+
 
       //load entrance text to page and update UI
       updateEnterText(currentRoom.enterText);
